@@ -10,7 +10,9 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format:check": "prettier . --check", 
+    "format:write": "prettier . --write"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx}": [

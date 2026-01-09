@@ -16,12 +16,18 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      eslintConfigPrettier,
-      ...pluginQuery.configs['flat/recommended'],
     ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
     },
   },
+  {
+    files: ['./src/components/**/*'],
+    rules: {
+      'react-refresh/only-export-components': 'warn',
+    },
+  },
+  eslintConfigPrettier,
+  ...pluginQuery.configs['flat/recommended'],
 ]);
