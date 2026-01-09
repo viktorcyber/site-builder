@@ -1,10 +1,15 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
 
-import "@/styles/globals.css";
-import App from "@/App";
-import QueryProvider from "@/providers/query-provider";
+import '@/styles/globals.css';
+import App from '@/App';
+import QueryProvider from '@/providers/query-provider';
+
+const root = createRoot((document.getElementById('root') as HTMLElement)!);
+
+const Root = ({ children }: { children: React.ReactNode }) =>
+  import.meta.env.DEV ? <StrictMode>{children}</StrictMode> : <>{children}</>;
 
 const Main = () => {
   return (
@@ -16,14 +21,17 @@ const Main = () => {
   );
 };
 
-const root = createRoot((document.getElementById("root") as HTMLElement)!);
+async function start() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('@/mocks/browser');
+    await worker.start();
+  }
 
-if (import.meta.env.DEV) {
   root.render(
-    <StrictMode>
+    <Root>
       <Main />
-    </StrictMode>
+    </Root>,
   );
-} else {
-  root.render(<Main />);
 }
+
+start();

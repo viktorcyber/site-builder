@@ -1,7 +1,7 @@
 export type RouteConfig = {
-    path: string;
-    component: React.ComponentType;
-}
+  path: string;
+  component: React.ComponentType;
+};
 
 export interface Project {
   id: number;
