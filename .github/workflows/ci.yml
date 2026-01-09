@@ -37,7 +37,12 @@ jobs:
         working-directory: ./client
 
       - name: Check Linting
-        run: npm run lint
+        run: npm run 
+        working-directory: ./client
+
+      - name: Fix Linting Issues
+        if: failure()
+        run: npm run lint:fix
         working-directory: ./client
 
   tests:
