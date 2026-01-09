@@ -37,7 +37,7 @@ jobs:
         working-directory: ./client
 
       - name: Check Linting
-        run: npm lint
+        run: npm run lint
         working-directory: ./client
 
   tests:
