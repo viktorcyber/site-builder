@@ -1,6 +1,6 @@
-import { Outlet } from "react-router";
+import { Outlet } from 'react-router';
 
-import Header from "@/components/shared/header";
+import Header from '@/components/shared/header';
 
 const RootLayout = () => {
   return (

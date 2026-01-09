@@ -1,4 +1,4 @@
-name: CI
+name: Continuous Integration (CI)
 
 on:
   push:
@@ -28,7 +28,12 @@ jobs:
         working-directory: ./client
 
       - name: Check formatting
-        run: npm format:check
+        run: npm run format:check
+        working-directory: ./client
+
+      - name: Fix formatting
+        if: failure()
+        run: npm run format:write
         working-directory: ./client
 
       - name: Check Linting

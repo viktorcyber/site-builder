@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 
-import { assets } from "@/assets/assets";
-import { menu } from "@/utils/constants";
+import { assets } from '@/assets/assets';
+import { menu } from '@/utils/constants';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,7 +32,7 @@ const Header = () => {
 
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate("/auth/sigin")}
+            onClick={() => navigate('/auth/sigin')}
             className="px-6 py-1.5 max-sm:text-sm bg-indigo-600 cursor-pointer active:scale-95 hover:bg-indigo-700 transition rounded"
           >
             Get started
@@ -65,7 +65,11 @@ const Header = () => {
       {menuOpen && (
         <div className="fixed inset-0 z-100 bg-black/60 text-white backdrop-blur flex flex-col items-center justify-center text-lg gap-8 md:hidden transition-transform duration-300">
           {menu.map((item) => (
-            <Link key={item.path} to={item.path} onClick={() => setMenuOpen(false)}>
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setMenuOpen(false)}
+            >
               {item.name}
             </Link>
           ))}

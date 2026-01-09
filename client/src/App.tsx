@@ -1,7 +1,7 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from 'react-router';
 
-import { publicRoutes } from "@/routes";
-import RootLayout from "@/components/layouts/layout";
+import { publicRoutes } from '@/routes';
+import RootLayout from '@/components/layouts/layout';
 
 const App = () => {
   return (

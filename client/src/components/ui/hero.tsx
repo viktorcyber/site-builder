@@ -1,9 +1,9 @@
-import { Loader2Icon } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router";
+import { Loader2Icon } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router';
 
 const Hero = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e: React.FormEvent) => {
@@ -52,8 +52,7 @@ const Hero = () => {
       </Link>
 
       <h1 className="text-center text-[40px] leading-12 md:text-6xl md:leading-17.5 mt-4 font-semibold max-w-3xl">
-        Turn thoughts into websites instantly, with AI
-        Powered.
+        Turn thoughts into websites instantly, with AI Powered.
       </h1>
 
       <p className="text-center text-base max-w-md mt-2">
@@ -73,10 +72,10 @@ const Hero = () => {
         />
         <button className="ml-auto flex items-center gap-2 bg-linear-to-r from-[#eda4f3] to-indigo-600 rounded-md px-4 py-2 cursor-pointer">
           {!loading ? (
-            "Generate with AI"
+            'Generate with AI'
           ) : (
             <>
-              Generating{" "}
+              Generating{' '}
               <Loader2Icon className="animate-spin size-4 text-white" />
             </>
           )}

@@ -6,7 +6,7 @@ export const handlers = [
       [
         {
           id: 1,
-          name: 'John'
+          name: 'John',
         },
       ],
       { status: 200 },
