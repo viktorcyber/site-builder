@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 
 const Hero = () => {
-  const [input, setInput] = useState('');
+  const [, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e: React.FormEvent) => {
