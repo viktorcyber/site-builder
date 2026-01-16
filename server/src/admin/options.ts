@@ -4,7 +4,7 @@ import { getModelByName } from '@adminjs/prisma';
 import passwordsFeature from '@adminjs/passwords';
 
 import componentLoader from './components.js';
-
+import prisma from '@/config/prisma.js';
 import { application } from '@/utils/constants.js';
 
 const baseNavigation = {

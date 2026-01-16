@@ -1,6 +1,8 @@
 name: Continuous Deployment (CD)
 
 on:
+  push:
+    branches: [ main ]
   workflow_run:
     workflows: ["Continuous Integration (CI)"]
     types:
@@ -27,15 +29,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
+      - name: Install dependencies Next.JS
         run: npm install
         working-directory: ./client
 
-      - name: Build and export static site
+      - name: Build and export static site Next.JS
         run: npm run build
         working-directory: ./client
 
-      - name: Deploy to Netlify
+      - name: Deploy client to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: ./client/dist
@@ -49,4 +51,31 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5
+
+      - name: Install dependencies Express.JS
+        run: npm install
+        working-directory: ./server
+
+      - name: Build and export static site Express.JS
+        run: npm run build
+        working-directory: ./server
+
+      - name: Deploy server to Render
+        uses: JorgeLNJunior/render-deploy@v1.4.7
+        with:
+          publish-dir: ./server/dist
+          production-branch: main
+          production-deploy: ${{ github.ref == 'refs/heads/main' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: 'Deploy from GitHub Actions'
+          clear_cache: true
+          wait_deploy: true
+          github_deployment: true
+          deployment_environment: 'production'
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
         timeout-minutes: 5
