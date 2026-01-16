@@ -18,7 +18,7 @@ const app: Application = express();
 await initializeDb();
 
 const corsOptions = {
-  origin: process.env.TRUSTED_ORIGINS?.split(',') || [],
+  origin: config.allowHost,
   credentials: true,
 };
 

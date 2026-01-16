@@ -15,7 +15,7 @@ const options = {
     ],
     servers: [
       {
-        url: `http://localhost:${config.PORT}`,
+        url: config.allowHost,
       },
     ],
   },
