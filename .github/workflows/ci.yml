@@ -7,44 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  style:
-    name: Style code
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ["20.x", "22.x"]
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v5
-
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v5
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./client
-
-      - name: Check formatting
-        run: npm run format:check
-        working-directory: ./client
-
-      - name: Fix formatting
-        if: failure()
-        run: npm run format:write
-        working-directory: ./client
-
-      - name: Check Linting
-        run: npm run 
-        working-directory: ./client
-
-      - name: Fix Linting Issues
-        if: failure()
-        run: npm run lint:fix
-        working-directory: ./client
-
   tests:
     name: Testing
     runs-on: ubuntu-latest
@@ -61,10 +23,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
+      - name: Install dependencies Next.JS
         run: npm install
         working-directory: ./client
 
-      - name: Run Tests
-        run: npm test
+      - name: Run tests Next.JS 
+        run: npm run test
         working-directory: ./client
+
+      - name: Install dependencies Express.JS
+        run: npm install
+        working-directory: ./server
+
+      - name: Run tests Express.JS
+        run: npm run test
+        working-directory: ./server

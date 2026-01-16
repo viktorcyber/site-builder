@@ -1,0 +1,45 @@
+services:
+  express:
+    build: 
+      context: ./server
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    ports:
+      - 9000:9000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    networks:
+      - prisma-network
+
+  db:
+    image: postgres:15
+    restart: always
+    env_file:
+      - ./server/.env
+    networks:
+      - prisma-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+
+networks:
+  prisma-network:
+
+volumes:
+  postgres_data:

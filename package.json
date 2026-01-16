@@ -1,0 +1,43 @@
+{
+  "name": "yobuilder",
+  "version": "1.0.0",
+  "description": "&copy; 2025 [viktorcyber](https://github.com/viktorcyber/)",
+  "scripts": {
+    "prepare": "husky",
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+  },
+  "lint-staged": {
+    "client/src/**/*.{ts,tsx}": [
+      "npm --prefix client run lint",
+      "npm --prefix client run lint:fix",
+      "npm --prefix client run format",
+      "npm --prefix client run format:fix"
+    ],
+    "server/src/**/*.{ts}": [
+      "npm --prefix server run lint",
+      "npm --prefix server run lint:fix",
+      "npm --prefix server run format",
+      "npm --prefix server run format:fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viktorcyber/yobuilder.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "viktorcyber",
+    "url": "https://github.com/viktorcyber/"
+  },
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/viktorcyber/yobuilder/issues"
+  },
+  "homepage": "https://github.com/viktorcyber/yobuilder#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7"
+  }
+}

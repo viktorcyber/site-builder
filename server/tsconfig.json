@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "jsx": "react",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2020",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "exclude": ["src/types/*.ts", "node_modules", ".vscode"],
+  "include": ["**/src/**/*"]
+}
