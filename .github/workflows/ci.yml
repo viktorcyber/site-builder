@@ -35,6 +35,13 @@ jobs:
         run: npm install
         working-directory: ./server
 
+      - name: Run Prisma generate
+        run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Run tests Express.JS
         run: npm run test
         working-directory: ./server
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
