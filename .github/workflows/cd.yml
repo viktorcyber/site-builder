@@ -62,16 +62,4 @@ jobs:
         working-directory: ./server
 
       - name: Deploy server to Render
-        uses: JorgeLNJunior/render-deploy@v1.4.7
-        with:
-          production-branch: main
-          production-deploy: ${{ github.ref == 'refs/heads/main' }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: 'Deploy from GitHub Actions'
-          github_deployment: true
-          deployment_environment: 'production'
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          clear_cache: true
-          wait_deploy: true
-        timeout-minutes: 5
+        run: curl -f -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
