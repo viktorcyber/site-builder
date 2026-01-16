@@ -37,6 +37,7 @@ jobs:
 
       - name: Run Prisma generate
         run: npx prisma generate
+        working-directory: ./server
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
