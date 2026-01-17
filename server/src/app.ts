@@ -44,7 +44,7 @@ app.use(admin.options.rootPath, adminRouter);
 app.use(router);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(errorMiddleware);
-app.use("/inngest", serve({ client: inngest, functions }));
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
 if (config.nodeEnv === 'production') {
   app.use(
