@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { useAuth, useClerk, UserButton } from '@clerk/clerk-react';
+import { BookMarked } from 'lucide-react';
 
 import { assets } from '@/assets/assets';
 import { menu } from '@/utils/constants';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { openSignIn } = useClerk();
+  const { isSignedIn } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -31,12 +35,37 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => navigate('/auth/sigin')}
-            className="px-6 py-1.5 max-sm:text-sm bg-indigo-600 cursor-pointer active:scale-95 hover:bg-indigo-700 transition rounded"
-          >
-            Get started
-          </button>
+          <div className="flex items-center justify-end min-w-20 sm:min-w-27.5">
+            {isSignedIn ? (
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: 'size-9',
+                  },
+                }}
+              >
+                <UserButton.MenuItems>
+                  <UserButton.Action
+                    label="Projects"
+                    labelIcon={<BookMarked width={15} />}
+                    onClick={() => navigate('/projects/')}
+                  />
+                </UserButton.MenuItems>
+              </UserButton>
+            ) : (
+              <button
+                onClick={() =>
+                  openSignIn({
+                    redirectUrl: '/',
+                  })
+                }
+                className="flex items-center justify-center font-medium px-4 py-1 sm:px-7 sm:py-2 max-sm:text-sm bg-indigo-600 cursor-pointer active:scale-95 hover:bg-indigo-700 transition rounded-full"
+              >
+                Login
+              </button>
+            )}
+          </div>
+
           <button
             id="open-menu"
             className="md:hidden active:scale-90 transition"

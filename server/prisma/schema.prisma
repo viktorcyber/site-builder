@@ -9,11 +9,19 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
+  clerkId  String @unique @default(uuid())
   email String  @unique
   name  String?
   password  String?
+  avatar      String?
+  isActive Boolean @default(true)
   role    Role     @default(USER)
+
   projects Project[]
+  transactions Transaction[]
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 enum Role {
@@ -21,10 +29,60 @@ enum Role {
   ADMIN
 }
 
+enum MessageRole { 
+  USER
+  ASSISTANT
+}
+
 model Project {
-  id        Int     @id @default(autoincrement())
+  id  String  @id @default(uuid())
   title     String  @unique
+  initialPrompt  String
+  currentCode String?
+  currentVersion  String @default("")
   published Boolean @default(false)
   authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+
+  author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  versions Version[]
+  conversations Conversation[]
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Conversation {
+  id        String       @id @default(uuid())
+  role      MessageRole
+  content   String
+  projectId String
+
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  timestamp DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Version {
+  id        String       @id @default(uuid())
+  code      String
+  description String?
+  projectId String
+
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  timestamp DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+  status        Boolean  @default(false)
+  planId        String
+  amount        Float
+  credits       Int
+
+  userId        Int
+  owner          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime @default(now())
+  updatedAt DateTime  @updatedAt
 }

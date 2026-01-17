@@ -51,12 +51,12 @@ const Hero = () => {
         </p>
       </Link>
 
-      <h1 className="text-center text-[40px] leading-12 md:text-6xl md:leading-17.5 mt-4 font-semibold max-w-3xl">
-        Turn thoughts into websites instantly, with AI Powered.
+      <h1 className="text-center text-[40px] leading-12 md:text-6xl md:leading-17.5 mt-4 font-semibold max-w-4xl">
+        AI-Driven Design for the Next Generation of Websites
       </h1>
 
-      <p className="text-center text-base max-w-md mt-2">
-        Create, customize and publish website faster than ever.
+      <p className="text-center text-slate-400 text-base max-w-md mt-2">
+        Experience the power of AI-driven design.
       </p>
 
       <form

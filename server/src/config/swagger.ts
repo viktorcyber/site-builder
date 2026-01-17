@@ -15,7 +15,7 @@ const options = {
     ],
     servers: [
       {
-        url: config.allowHost,
+        url: config.serverHost,
       },
     ],
   },

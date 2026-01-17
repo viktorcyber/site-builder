@@ -23,9 +23,15 @@ export default defineConfig([
     },
   },
   {
+    files: ['./src/main.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
     files: ['./src/components/**/*'],
     rules: {
-      'react-refresh/only-export-components': 'warn',
+      'react-refresh/only-export-components': 'warn'
     },
   },
   eslintConfigPrettier,
