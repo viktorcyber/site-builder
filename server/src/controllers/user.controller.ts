@@ -3,15 +3,6 @@ import { clerkClient, getAuth } from '@clerk/express';
 
 import userService from '@/services/user.service.js';
 
-export const getUsers = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const users = await userService.getAllUsers();
-    res.status(200).json(users);
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const getCurrentUser = async (req: Request, res: Response) => {
   const { isAuthenticated, userId } = getAuth(req);
 

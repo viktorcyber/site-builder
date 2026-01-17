@@ -1,7 +1,5 @@
 import { Router } from 'express';
 
-import { getUsers } from '@/controllers/user.controller.js';
-
 const router = Router();
 
 /**
@@ -14,6 +12,6 @@ const router = Router();
  *       200:
  *         description: A list of users.
  */
-router.get('/', getUsers);
+router.get('/');
 
 export default router;
