@@ -15,7 +15,6 @@ import { admin, adminRouter } from '@/admin/index.js';
 import { serverOptions } from '@/utils/constants.js';
 import router from '@/routes/index.js';
 import swaggerDocs from '@/config/swagger.js';
-import errorMiddleware from '@/middlewares/error.middleware.js';
 
 const app: Application = express();
 
@@ -43,8 +42,7 @@ app.use(
 app.use(admin.options.rootPath, adminRouter);
 app.use(router);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use(errorMiddleware);
-app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/inngest", serve({ client: inngest, functions }));
 
 if (config.nodeEnv === 'production') {
   app.use(
