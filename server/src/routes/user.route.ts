@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import { list } from "@/controllers/user.controller.js";
+
 const router = Router();
 
 /**
@@ -12,6 +14,6 @@ const router = Router();
  *       200:
  *         description: A list of users.
  */
-router.get('/');
+router.get('/', list);
 
 export default router;

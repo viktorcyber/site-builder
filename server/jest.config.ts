@@ -1,5 +1,10 @@
+import type { Config } from "jest";
+import { createDefaultEsmPreset } from "ts-jest";
+
+const presetConfig = createDefaultEsmPreset({});
+
 export default {
-  preset: 'ts-jest/presets/default-esm',
+  ...presetConfig,
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
@@ -16,9 +21,10 @@ export default {
   },
   resolver: 'ts-jest-resolver',
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
-  rootDir: '.',
-  testMatch: ['<rootDir>/src/**/*.(spec|test).ts'],
-  setupFilesAfterEnv: ['<rootDir>/src/__tests__/jest.setup.ts'],
+  testMatch: ['**/src/__tests__/**/*.(spec|test).ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/__tests__/__mocks__/singleton.ts'],
+  preset: 'ts-jest',
+  clearMocks: true,
   testPathIgnorePatterns: ['/node_modules/'],
   verbose: true,
-};
+} satisfies Config;

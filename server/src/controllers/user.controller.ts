@@ -1,25 +1,14 @@
 import { Request, Response } from 'express';
-import { clerkClient, getAuth } from '@clerk/express';
 
-import userService from '@/services/user.service.js';
+import { getUsers } from '@/services/user.service.js';
 
-export const getCurrentUser = async (req: Request, res: Response) => {
-  const { isAuthenticated, userId } = getAuth(req);
+export const create = async (req: Request, res: Response) => {};
 
-  if (!isAuthenticated) {
-    return res.status(401).json({ error: 'User not authenticated' });
-  }
-
-  const user = await clerkClient.users.getUser(userId);
-
-  res.json(user);
-};
-
-
-export const getUserCredits = async (req: Request, res: Response) => {
+export const list = async (req: Request, res: Response) => {
   try {
-    let x = 3
+    const data = await getUsers();
+    return res.json(data);
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};

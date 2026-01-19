@@ -1,7 +1,7 @@
 import argon2 from 'argon2';
 
-import prisma from '@/config/prisma.js';
-import logger from '@/config/logger.js';
+import prisma from '@/libs/client.js';
+import logger from '@/middlewares/logger.js';
 
 async function main() {
   await prisma.user.create({

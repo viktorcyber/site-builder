@@ -1,6 +1,6 @@
 import argon2 from 'argon2';
 
-import prisma from '@/config/prisma.js';
+import prisma from '@/libs/client.js';
 
 /**
  * Make sure to modify "authenticate" to be a proper authentication method

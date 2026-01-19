@@ -6,7 +6,7 @@ import session from 'express-session';
 import authenticate from './authenticate.js';
 import adminOptions from './options.js';
 
-import config from '@/config/index.js';
+import config from '@/config/env.js';
 
 export const admin = new AdminJS(adminOptions);
 

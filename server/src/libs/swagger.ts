@@ -1,6 +1,6 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 
-import config from '@/config/index.js';
+import config from '@/config/env.js';
 import { serverOptions } from '@/utils/constants.js';
 
 const options = {

@@ -1,65 +1,65 @@
-name: Continuous Deployment (CD)
+# name: Continuous Deployment (CD)
 
-on:
-  push:
-    branches: [ main ]
-  workflow_run:
-    workflows: ["Continuous Integration (CI)"]
-    types:
-      - completed
+# on:
+#   push:
+#     branches: [ main ]
+#   workflow_run:
+#     workflows: ["Continuous Integration (CI)"]
+#     types:
+#       - completed
 
-jobs:
-  build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      deployments: write
-    strategy:
-      matrix:
-        node-version: ["22.x"]
+# jobs:
+#   build:
+#     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       pull-requests: write
+#       deployments: write
+#     strategy:
+#       matrix:
+#         node-version: ["22.x"]
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v5
 
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v5
-        with:
-          node-version: ${{ matrix.node-version }}
+#       - name: Set up Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v5
+#         with:
+#           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies Next.JS
-        run: npm install
-        working-directory: ./client
+#       - name: Install dependencies Next.JS
+#         run: npm install
+#         working-directory: ./client
 
-      - name: Build and export static site Next.JS
-        run: npm run build
-        working-directory: ./client
+#       - name: Build and export static site Next.JS
+#         run: npm run build
+#         working-directory: ./client
 
-      - name: Deploy client to Netlify
-        uses: nwtgck/actions-netlify@v2.0
-        with:
-          publish-dir: ./client/dist
-          production-branch: main
-          production-deploy: ${{ github.ref == 'refs/heads/main' }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: 'Deploy from GitHub Actions'
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 5
+#       - name: Deploy client to Netlify
+#         uses: nwtgck/actions-netlify@v2.0
+#         with:
+#           publish-dir: ./client/dist
+#           production-branch: main
+#           production-deploy: ${{ github.ref == 'refs/heads/main' }}
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           deploy-message: 'Deploy from GitHub Actions'
+#           enable-pull-request-comment: true
+#           enable-commit-comment: true
+#           overwrites-pull-request-comment: true
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#         timeout-minutes: 5
 
-      - name: Install dependencies Express.JS
-        run: npm install
-        working-directory: ./server
+#       - name: Install dependencies Express.JS
+#         run: npm install
+#         working-directory: ./server
 
-      - name: Build and export static site Express.JS
-        run: npm run build
-        working-directory: ./server
+#       - name: Build and export static site Express.JS
+#         run: npm run build
+#         working-directory: ./server
 
-      - name: Deploy server to Render
-        run: curl -f -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+#       - name: Deploy server to Render
+#         run: curl -f -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"

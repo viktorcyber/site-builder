@@ -1,5 +1,10 @@
-import prisma from '@/config/prisma.js';
+import prisma from '@/libs/client.js';
+import { User } from '@/types/validates.js';
 
-const getAllUsers = async () => await prisma.user.findMany();
+export const getUsers = async () => await prisma.user.findMany();
 
-export default { getAllUsers };
+export async function createUser(user: User) {
+  return await prisma.user.create({
+    data: user,
+  });
+}

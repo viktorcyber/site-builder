@@ -1,7 +1,7 @@
 import app from '@/app.js';
-import config from '@/config/index.js';
+import config from '@/config/env.js';
 import { admin } from '@/admin/index.js';
-import logger from '@/config/logger.js';
+import logger from '@/middlewares/logger.js';
 
 const start = async () => {
   app.listen(config.PORT, () => {

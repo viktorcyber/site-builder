@@ -1,6 +1,6 @@
 import { Inngest } from 'inngest';
 
-import prisma from '@/config/prisma.js';
+import prisma from '@/libs/client.js';
 
 export const inngest = new Inngest({ id: 'yobuilder' });
 
